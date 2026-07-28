@@ -1,0 +1,26 @@
+{
+  "id": "com.lvfeng.test-plugin_00000000-0000-0000-0000-000000000001",
+  "name": "测试插件",
+  "version": "1.0.0",
+  "author": "lvfeng",
+  "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
+  "activation": { "type": 1 },
+  "extensions": {
+    "slots": [
+      {
+        "id": "test-article-viewer",
+        "name": "测试·专栏渲染器",
+        "description": "覆盖 article 内置渲染器，验证 resourceViewer Handler 通道（插件渲染器命中时替换内置 ArticleRenderer）",
+        "slotType": "resourceViewer",
+        "content": {
+          "contentType": "precompiled",
+          "source": { "js": "views/article-viewer.js", "css": "views/article-viewer.css" },
+          "resourceType": "article"
+        }
+      }
+    ],
+    "staticResources": {
+      "directories": ["views/"]
+    }
+  }
+}
