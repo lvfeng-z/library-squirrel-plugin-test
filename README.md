@@ -31,3 +31,9 @@ pwsh ./build.ps1
 - 禁止用 `import { X as Y }` 的 as 语法（Vite 工厂插件不兼容），需要别名直接在解构时改名。
 - 样式遵循主题令牌契约（`var(--app-*)`），自动跟随主程序主题。
 - 发布主程序前应移除：`test-plugin.zip` + `default_config.yaml` 中 test-plugin 声明 + 主程序内的 `test-plugin-src`（若残留）。
+
+## 许可协议
+
+本项目采用 [MIT](LICENSE) 许可协议，作为插件开发者的可复制参考模板。
+
+Copyright (c) 2026 lvfeng
