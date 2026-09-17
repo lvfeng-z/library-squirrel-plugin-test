@@ -2,7 +2,7 @@
   "id": "com.lvfeng.test-plugin",
   "name": "测试插件",
   "version": "1.0.0",
-  "contractVersion": 6,
+  "contractVersion": 8,
   "author": "lvfeng",
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
   "activation": { "type": 1 },
