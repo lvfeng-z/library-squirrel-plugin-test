@@ -1,4 +1,4 @@
-﻿# 打包测试插件 zip 到主程序 resources/bundled-plugins/
+# 打包测试插件 zip 到主程序 resources/bundled-plugins/
 # 用法：仓库根目录运行  pwsh ./build.ps1  或  powershell ./build.ps1
 $ErrorActionPreference = 'Stop'
 $repoRoot = $PSScriptRoot
@@ -18,6 +18,17 @@ if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($buildId)) {
 $stage = Join-Path $env:TEMP ("test-plugin-stage-" + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $stage | Out-Null
 try {
+    # Runtime plugin binary: built straight into the staging dir, so no exe is left in the repo tree
+    # and no dist turnaround is needed.
+    Write-Host "Building plugin..."
+    Push-Location $repoRoot
+    try {
+        go build -o (Join-Path $stage 'test_plugin.exe') .
+        if ($LASTEXITCODE -ne 0) { throw "go build failed with exit code $LASTEXITCODE" }
+    } finally {
+        Pop-Location
+    }
+
     Copy-Item (Join-Path $repoRoot 'plugin.json') $stage
     $manifestPath = Join-Path $stage 'plugin.json'
     $manifestText = [System.IO.File]::ReadAllText($manifestPath)
@@ -25,11 +36,12 @@ try {
     [System.IO.File]::WriteAllText($manifestPath, $stamped, (New-Object System.Text.UTF8Encoding($false)))
     Write-Host "  buildId: $($buildId.Trim())"
 
-    # Pack plugin.json + views to zip root (same layout as other bundled zips: plugin.json at root, views flattened).
+    # Pack plugin.json + views + the plugin exe at the zip root (same layout as other bundled zips:
+    # plugin.json and entryFile at root, views flattened).
     # Suppress progress output before Compress-Archive (same workaround as pixiv/bilibili build scripts):
     # no-BOM CJK scripts decoded as GBK by powershell -File make Write-Progress break Compress-Archive silently.
     $ProgressPreference = 'SilentlyContinue'
-    Compress-Archive -Path $manifestPath, (Join-Path $repoRoot 'views') -DestinationPath $dest -Force
+    Compress-Archive -Path $manifestPath, (Join-Path $repoRoot 'views'), (Join-Path $stage 'test_plugin.exe') -DestinationPath $dest -Force
 } finally {
     Remove-Item -Recurse -Force $stage -ErrorAction SilentlyContinue
 }
