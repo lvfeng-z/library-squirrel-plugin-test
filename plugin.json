@@ -2,14 +2,29 @@
   "id": "com.lvfeng.test-plugin",
   "name": "测试插件",
   "version": "1.0.0",
-  "contractVersion": 10,
+  "contractVersion": 11,
   "author": "lvfeng",
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
   "entryFile": "test_plugin.exe",
   "activation": { "type": 1 },
   "extensions": {
-    "taskHandlers": [{ "id": "main" }],
-    "siteAuthorFetch": { "sites": ["bilibili"] },
+    "taskHandlers": [
+      {
+        "id": "main",
+        "name": "TestTaskHandler",
+        "description": "测试任务处理器（只声明与应答，不做真实抓取）",
+        "urlPatterns": [
+          "^https?://www\\.bilibili\\.com/video/(BV[a-zA-Z0-9]+|av\\d+)",
+          "^https?://b23\\.tv/[A-Za-z0-9]+",
+          "^https?://www\\.bilibili\\.com/(opus|dynamic)/\\d+",
+          "^https?://www\\.bilibili\\.com/read/cv\\d+"
+        ]
+      }
+    ],
+    "siteAuthorFetch": [
+      { "id": "main", "name": "主作者源", "sites": ["bilibili"] },
+      { "id": "alt", "name": "备用作者源", "sites": ["bilibili"] }
+    ],
     "frontendExtensions": [
       {
         "id": "test-article-viewer",
