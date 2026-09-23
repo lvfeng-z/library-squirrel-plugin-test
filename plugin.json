@@ -2,17 +2,17 @@
   "id": "com.lvfeng.test-plugin",
   "name": "测试插件",
   "version": "1.0.0",
-  "contractVersion": 11,
+  "contractVersion": 12,
   "author": "lvfeng",
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
   "entryFile": "test_plugin.exe",
   "activation": { "type": 1 },
   "extensions": {
-    "taskHandlers": [
+    "workFetch": [
       {
         "id": "main",
-        "name": "TestTaskHandler",
-        "description": "测试任务处理器（只声明与应答，不做真实抓取）",
+        "name": "测试作品拉取（只声明与应答）",
+        "description": "测试作品拉取（只声明与应答，不做真实抓取）",
         "urlPatterns": [
           "^https?://www\\.bilibili\\.com/video/(BV[a-zA-Z0-9]+|av\\d+)",
           "^https?://b23\\.tv/[A-Za-z0-9]+",

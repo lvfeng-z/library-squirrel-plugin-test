@@ -11,14 +11,14 @@ import (
 // errStubNoDownload 任务执行面的统一应答：本插件只做声明与路由应答，不产生任何资源。
 var errStubNoDownload = errors.New("测试插件不执行下载，请改选 bilibiliSuite 处理该任务")
 
-// TestTaskHandler 任务处理器桩。Create/CreateWorkInfo 返回合法的最小响应以支撑任务创建与
+// TestWorkFetcher 作品拉取扩展桩。Create/CreateWorkInfo 返回合法的最小响应以支撑任务创建与
 // 冲突候选选择；Start/Retry/Resume 一律拒绝，避免桩插件产出残缺资源。
-type TestTaskHandler struct {
+type TestWorkFetcher struct {
 	logger sdkdto.Logger
 }
 
 // Create 由 URL 派生站点侧作品 ID，返回单条任务创建响应（站点键 bilibili、资源类型 video）。
-func (h *TestTaskHandler) Create(url string) (*sdkdto.TaskCreateResult, error) {
+func (h *TestWorkFetcher) Create(url string) (*sdkdto.TaskCreateResult, error) {
 	siteWorkId := deriveSiteWorkId(url)
 	h.logger.Infof("测试插件创建任务 siteWorkId=%s url=%s", siteWorkId, url)
 	return sdkdto.BatchResult([]*sdkdto.TaskCreateResponse{{
@@ -36,32 +36,32 @@ func (h *TestTaskHandler) Create(url string) (*sdkdto.TaskCreateResult, error) {
 }
 
 // CreateWorkInfo 回填作品信息：作品身份取自任务行的站点与站点侧作品 ID。
-func (h *TestTaskHandler) CreateWorkInfo(task *sdkdto.TaskDTO) (*sdkdto.WorkResponse, error) {
+func (h *TestWorkFetcher) CreateWorkInfo(task *sdkdto.TaskDTO) (*sdkdto.WorkResponse, error) {
 	return testWorkResponse(task), nil
 }
 
 // Start 拒绝执行：桩不产出资源。
-func (h *TestTaskHandler) Start(ctx context.Context, task *sdkdto.TaskDTO, storeRoles []string) ([]*sdkdto.StoreSpec, *sdkdto.WorkResponse, error) {
+func (h *TestWorkFetcher) Start(ctx context.Context, task *sdkdto.TaskDTO, storeRoles []string) ([]*sdkdto.StoreSpec, *sdkdto.WorkResponse, error) {
 	return nil, nil, errStubNoDownload
 }
 
 // Retry 拒绝执行：桩不产出资源。
-func (h *TestTaskHandler) Retry(task *sdkdto.TaskDTO) (*sdkdto.WorkResponse, error) {
+func (h *TestWorkFetcher) Retry(task *sdkdto.TaskDTO) (*sdkdto.WorkResponse, error) {
 	return nil, errStubNoDownload
 }
 
 // Pause 无在途执行，空操作成功。
-func (h *TestTaskHandler) Pause(param *sdkdto.TaskResParam) error {
+func (h *TestWorkFetcher) Pause(param *sdkdto.TaskResParam) error {
 	return nil
 }
 
 // Stop 无在途执行，空操作成功。
-func (h *TestTaskHandler) Stop(param *sdkdto.TaskResParam) error {
+func (h *TestWorkFetcher) Stop(param *sdkdto.TaskResParam) error {
 	return nil
 }
 
 // Resume 拒绝续传：桩不产出资源，无可续传轨道。
-func (h *TestTaskHandler) Resume(ctx context.Context, param *sdkdto.TaskResumeParam) ([]*sdkdto.StoreSpec, *sdkdto.WorkResponse, error) {
+func (h *TestWorkFetcher) Resume(ctx context.Context, param *sdkdto.TaskResumeParam) ([]*sdkdto.StoreSpec, *sdkdto.WorkResponse, error) {
 	return nil, nil, errStubNoDownload
 }
 
