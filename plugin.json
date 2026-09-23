@@ -13,6 +13,7 @@
         "id": "main",
         "name": "测试作品拉取（只声明与应答）",
         "description": "测试作品拉取（只声明与应答，不做真实抓取）",
+        "siteKey": "bilibili",
         "urlPatterns": [
           "^https?://www\\.bilibili\\.com/video/(BV[a-zA-Z0-9]+|av\\d+)",
           "^https?://b23\\.tv/[A-Za-z0-9]+",
