@@ -7,6 +7,16 @@
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
   "entryFile": "test_plugin.exe",
   "activation": { "type": 1 },
+  "settings": [
+    {
+      "key": "enableParticipation",
+      "type": "boolean",
+      "title": "参与派生面",
+      "description": "关闭后：专栏渲染器（resourceViewer）与作品拉取候选（含 URL 监听）立即退出，重新打开立即恢复——验证设置驱动的派生面热生效",
+      "default": "true"
+    }
+  ],
+  "settingsResolver": { "script": "resolver.js", "contractVersion": 1 },
   "extensions": {
     "workFetch": [
       {

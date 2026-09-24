@@ -16,6 +16,12 @@ LibrarySquirrel 最小测试插件——用于验证前端扩展点（resourceVi
 
 **验证**：主程序打开任意 article 资源 → 应显示"🔧 测试插件渲染器（article）" + resource/work 的 JSON 信息。卸载插件 → 回内置 ArticleRenderer。
 
+### enableParticipation（设置驱动的派生面热生效）
+
+清单根级声明布尔设置 `enableParticipation`（默认 `"true"`）+ `settingsResolver`（`resolver.js`，契约见 SDK `settingresolver/contract.d.ts`）。关闭开关 → resolver 输出停用 `frontendExtensions/test-article-viewer` 与 `workFetch/main`（URL 监听随条目联动摘除）；重新打开 → 立即恢复。resolver.js 保持纯 JS、ES2015 语法面（宿主 goja 引擎未锚定 ES2017+ 语法）。
+
+**验证**：插件设置页切换开关 → 专栏渲染器与作品拉取候选立即退出/恢复（不重启、不整页 reload）；本地预演用 SDK harness：`node ../library-squirrel-sdk/settingresolver/harness.mjs resolver.js --manifest plugin.json --settings '{"enableParticipation": "false"}'`。
+
 ## 构建
 
 ```powershell

@@ -36,12 +36,13 @@ try {
     [System.IO.File]::WriteAllText($manifestPath, $stamped, (New-Object System.Text.UTF8Encoding($false)))
     Write-Host "  buildId: $($buildId.Trim())"
 
-    # Pack plugin.json + views + the plugin exe at the zip root (same layout as other bundled zips:
-    # plugin.json and entryFile at root, views flattened).
+    # Pack plugin.json + views + resolver.js + the plugin exe at the zip root (same layout as other bundled zips:
+    # plugin.json and entryFile at root, views flattened). resolver.js is the settings-driven participation
+    # script declared by the root-level settingsResolver manifest field (install gate reads it from the zip).
     # Suppress progress output before Compress-Archive (same workaround as pixiv/bilibili build scripts):
     # no-BOM CJK scripts decoded as GBK by powershell -File make Write-Progress break Compress-Archive silently.
     $ProgressPreference = 'SilentlyContinue'
-    Compress-Archive -Path $manifestPath, (Join-Path $repoRoot 'views'), (Join-Path $stage 'test_plugin.exe') -DestinationPath $dest -Force
+    Compress-Archive -Path $manifestPath, (Join-Path $repoRoot 'views'), (Join-Path $repoRoot 'resolver.js'), (Join-Path $stage 'test_plugin.exe') -DestinationPath $dest -Force
 } finally {
     Remove-Item -Recurse -Force $stage -ErrorAction SilentlyContinue
 }
