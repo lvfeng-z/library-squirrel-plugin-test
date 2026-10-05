@@ -12,5 +12,8 @@ func Activate(ctx sdkdto.PluginContext, handler *TestWorkFetcher, fetchers ...*T
 		f.logger = ctx.GetLogger().Named("SiteAuthorFetcher(" + f.entryID + ")")
 	}
 
+	// 偏好域三方法演练回路（订阅前端演练页请求，经 SDK 偏好域执行并回发结果）
+	RunPreferenceDrill(ctx)
+
 	ctx.Infof("测试插件已激活")
 }

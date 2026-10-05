@@ -1,0 +1,65 @@
+/* 偏好三方法演练页样式（view 扩展 test-preference-drill） */
+.pref-drill {
+  padding: 20px 24px;
+  max-width: 760px;
+}
+.pref-drill-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.pref-drill-desc {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--app-text-regular, #606266);
+}
+.pref-drill-desc code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--app-fill-regular, #f0f2f5);
+  font-size: 12px;
+}
+.pref-drill-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.pref-drill-btn {
+  padding: 7px 16px;
+  border: 1px solid var(--app-border-color, #dcdfe6);
+  border-radius: 6px;
+  background: var(--app-bg-color, #fff);
+  font-size: 13px;
+  cursor: pointer;
+}
+.pref-drill-btn:hover {
+  border-color: var(--app-color-primary, #409eff);
+  color: var(--app-color-primary, #409eff);
+}
+.pref-drill-btn-overwrite {
+  border-style: dashed;
+}
+.pref-drill-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pref-drill-log-line {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: Consolas, Monaco, monospace;
+  background: var(--app-fill-regular, #f5f7fa);
+  color: var(--app-text-regular, #606266);
+  word-break: break-all;
+}
+.pref-drill-log-ok {
+  color: var(--app-color-success, #67c23a);
+}
+.pref-drill-log-err {
+  color: var(--app-color-danger, #f56c6c);
+}
+.pref-drill-log-latest {
+  outline: 1px solid var(--app-border-color, #dcdfe6);
+}

@@ -1,8 +1,8 @@
 {
   "id": "com.lvfeng.test-plugin",
   "name": "测试插件",
-  "version": "1.0.0",
-  "contractVersion": 12,
+  "version": "1.1.0",
+  "contractVersion": 13,
   "author": "lvfeng",
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
   "entryFile": "test_plugin.exe",
@@ -47,6 +47,23 @@
           "source": { "js": "views/article-viewer.js", "css": "views/article-viewer.css" },
           "resourceType": "article"
         }
+      },
+      {
+        "id": "test-preference-drill",
+        "name": "测试·偏好演练",
+        "description": "偏好域三方法演练页：经 SDK GetPreference/SetPreference/ListMyPreferences 写入、覆写、读取、列键，结果经前后端事件通道回发展示",
+        "kind": "view",
+        "content": {
+          "contentType": "precompiled",
+          "source": { "js": "views/preference-drill.js", "css": "views/preference-drill.css" }
+        }
+      },
+      {
+        "id": "test-preference-menu",
+        "name": "偏好演练",
+        "description": "侧栏菜单入口，跳转偏好演练页",
+        "kind": "menu",
+        "content": { "viewId": "test-preference-drill" }
       }
     ]
   }
