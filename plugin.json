@@ -18,6 +18,7 @@
   ],
   "settingsResolver": { "script": "resolver.js", "contractVersion": 1 },
   "settingsPage": "test-settings-page",
+  "settingsPresent": "dialog",
   "extensions": {
     "workFetch": [
       {
@@ -62,7 +63,7 @@
       {
         "id": "test-settings-page",
         "name": "测试·自定义设置页",
-        "description": "settingsPage 声明的自定义设置页载体（最简 vueSource 形态）：插件管理页「设置」据此直达本页，替代标准设置弹窗",
+        "description": "settingsPage 声明的自定义设置页载体（最简 vueSource 形态）：清单声明 dialog 呈现后，插件管理页「设置」在宿主弹窗内容区呈现本组件，替代标准设置弹窗",
         "kind": "view",
         "content": {
           "contentType": "vueSource",
