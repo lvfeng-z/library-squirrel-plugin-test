@@ -1,7 +1,7 @@
 {
   "id": "com.lvfeng.test-plugin",
   "name": "测试插件",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "contractVersion": 13,
   "author": "lvfeng",
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
@@ -17,6 +17,7 @@
     }
   ],
   "settingsResolver": { "script": "resolver.js", "contractVersion": 1 },
+  "settingsPage": "test-settings-page",
   "extensions": {
     "workFetch": [
       {
@@ -56,6 +57,16 @@
         "content": {
           "contentType": "precompiled",
           "source": { "js": "views/preference-drill.js", "css": "views/preference-drill.css" }
+        }
+      },
+      {
+        "id": "test-settings-page",
+        "name": "测试·自定义设置页",
+        "description": "settingsPage 声明的自定义设置页载体（最简 vueSource 形态）：插件管理页「设置」据此直达本页，替代标准设置弹窗",
+        "kind": "view",
+        "content": {
+          "contentType": "vueSource",
+          "source": { "vue": "views/settings-page.vue" }
         }
       },
       {
