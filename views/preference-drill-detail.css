@@ -1,0 +1,26 @@
+/* 偏好演练子页样式（view 扩展 test-preference-drill-detail） */
+.pref-drill-detail {
+  padding: 20px 24px;
+  max-width: 760px;
+}
+.pref-drill-detail-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.pref-drill-detail-desc {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--app-text-regular, #606266);
+}
+.pref-drill-detail-route {
+  margin: 0;
+  font-size: 12px;
+  color: var(--app-text-secondary, #909399);
+}
+.pref-drill-detail-route code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--app-fill-regular, #f0f2f5);
+  font-size: 12px;
+}

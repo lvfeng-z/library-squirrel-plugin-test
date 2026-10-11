@@ -40,6 +40,14 @@
 .pref-drill-btn-overwrite {
   border-style: dashed;
 }
+.pref-drill-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 4px 7px 16px;
+  font-size: 13px;
+  color: var(--app-color-primary, #409eff);
+  text-decoration: none;
+}
 .pref-drill-log {
   display: flex;
   flex-direction: column;

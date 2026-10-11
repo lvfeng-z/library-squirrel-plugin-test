@@ -85,6 +85,14 @@ export default function (__VUE__, __WAILS_RUNTIME__) {
         }, 8000)
       }
 
+      // 「向下」导航演示：从本页 hash 路径取复合前缀（publicId/）拼子页条目 id，
+      // 锚点改 hash 即普通路由跳转，不经任何专用通道
+      function childPageHref () {
+        var m = /^#\/(.*)\/([^/]+)$/.exec(location.hash || '')
+        if (!m) return '#'
+        return '#/' + m[1] + '/test-preference-drill-detail'
+      }
+
       return function () {
         return h('div', { class: 'pref-drill' }, [
           h('h2', { class: 'pref-drill-title' }, '🔧 测试插件·偏好三方法演练'),
@@ -109,7 +117,8 @@ export default function (__VUE__, __WAILS_RUNTIME__) {
             h('button', {
               class: 'pref-drill-btn pref-drill-btn-list',
               onClick: function () { drill('list', '列键清单') }
-            }, '列键清单')
+            }, '列键清单'),
+            h('a', { class: 'pref-drill-link', href: childPageHref() }, '进入子页 ↘')
           ]),
           h('div', { class: 'pref-drill-log' }, logLines.value.map(function (line, i) {
             return h('div', {

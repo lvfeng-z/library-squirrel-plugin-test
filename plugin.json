@@ -1,7 +1,7 @@
 {
   "id": "com.lvfeng.test-plugin",
   "name": "测试插件",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "contractVersion": 13,
   "author": "lvfeng",
   "description": "最小测试插件——验证前端扩展点（resourceViewer Handler 等），仅供开发测试，发布前应移除",
@@ -68,6 +68,17 @@
         "content": {
           "contentType": "vueSource",
           "source": { "vue": "views/settings-page.vue" }
+        }
+      },
+      {
+        "id": "test-preference-drill-detail",
+        "name": "测试·偏好演练子页",
+        "description": "挂在偏好演练页之下的子页（content.parent 指向同插件 view 条目 test-preference-drill）：验证宿主面包屑、Alt+← 逐级上退与停用级联落点",
+        "kind": "view",
+        "content": {
+          "contentType": "precompiled",
+          "source": { "js": "views/preference-drill-detail.js", "css": "views/preference-drill-detail.css" },
+          "parent": "test-preference-drill"
         }
       },
       {
