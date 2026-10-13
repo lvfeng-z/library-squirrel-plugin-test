@@ -74,11 +74,11 @@ func testWorkResponse(task *sdkdto.TaskDTO) *sdkdto.WorkResponse {
 	return &sdkdto.WorkResponse{
 		Work: &sdkdto.WorkDTO{
 			SiteWorkId:   &siteWorkId,
-			SiteWorkName: ptrOf("测试插件作品 " + siteWorkId),
+			SiteWorkName: new("测试插件作品 " + siteWorkId),
 		},
 		Site: &sdkdto.SiteDTO{
 			SiteKey:  "bilibili",
-			SiteName: ptrOf("bilibili"),
+			SiteName: new("bilibili"),
 		},
 		SiteAuthors: []*sdkdto.TaskSiteAuthorDTO{{
 			SiteAuthorId: siteWorkId,
@@ -89,8 +89,10 @@ func testWorkResponse(task *sdkdto.TaskDTO) *sdkdto.WorkResponse {
 }
 
 // ptrOf 取字符串地址（proto 消息的可空标量字段以指针表达）
+//
+//go:fix inline
 func ptrOf(s string) *string {
-	return &s
+	return new(s)
 }
 
 // deriveSiteWorkId 取 URL 最后一个路径段作为站点侧作品 ID（只做标识来源，不做站点解析）。
